@@ -13,7 +13,7 @@ class bootcamp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: login.id,
+      initialRoute: splashscreen.id,
       routes: {
         splashscreen.id: (context) => splashscreen(),
         homescreen.id: (context) => homescreen(),

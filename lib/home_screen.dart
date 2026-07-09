@@ -49,7 +49,7 @@ class _homescreenState extends State<homescreen> {
               onPressed: () async {
                 SharedPreferences sp = await SharedPreferences.getInstance();
                 sp.clear();
-                Navigator.pushNamed(context, login.id
+                Navigator.pushReplacementNamed(context, login.id
                 );
               },
               child: Text(

@@ -87,7 +87,7 @@ class _loginState extends State<login> {
                 sp.setString("email", emailcontroller.text.toString());
                 sp.setString('age', agecontroller.text.toString());
                 sp.setBool("isLogin", true);
-                Navigator.pushNamed(context, homescreen.id);
+                Navigator.pushReplacementNamed(context, homescreen.id);
               },
               child: Container(
                 height: 50,
