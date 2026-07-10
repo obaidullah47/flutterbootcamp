@@ -11,14 +11,24 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+  String selectedvalue = "Male";
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   final agecontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    emailcontroller.dispose();
+    passwordcontroller.dispose();
+    agecontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyActions: false,
+        automaticallyImplyLeading: false,
         title: Text(
           "Login",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -47,12 +57,33 @@ class _loginState extends State<login> {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextFormField(
               controller: passwordcontroller,
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: "Password",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: DropdownButton<String>(
+              value: selectedvalue,
+              isExpanded: true,
+              dropdownColor: Colors.lightBlue,
+              borderRadius: BorderRadius.circular(10),
+              items: [
+                DropdownMenuItem(value: "Male", child: Text("Male")),
+                DropdownMenuItem(value: "Female", child: Text("Female")),
+                DropdownMenuItem(value: "Other", child: Text("Other")),
+              ],
+              onChanged: (newValue) {
+                setState(() {
+                  selectedvalue = newValue!;
+                });
+              },
             ),
           ),
           SizedBox(height: 20),
@@ -82,10 +113,10 @@ class _loginState extends State<login> {
                   );
                   return;
                 }
-
                 SharedPreferences sp = await SharedPreferences.getInstance();
                 sp.setString("email", emailcontroller.text.toString());
-                sp.setString('age', agecontroller.text.toString());
+                sp.setString("age", agecontroller.text.toString());
+                sp.setString("gender", selectedvalue);
                 sp.setBool("isLogin", true);
                 Navigator.pushReplacementNamed(context, homescreen.id);
               },

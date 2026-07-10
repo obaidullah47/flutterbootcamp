@@ -13,6 +13,24 @@ class homescreen extends StatefulWidget {
 }
 
 class _homescreenState extends State<homescreen> {
+  String email = '';
+  String age = '';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    email = sp.getString("email") ?? "";
+    age = sp.getString("age") ?? '';
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,34 +41,34 @@ class _homescreenState extends State<homescreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(
-              child: Container(
-                height: 150,
-                width: 350,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Email",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                child: Center(
-                  child: Text(
-                    "HomeScreenn",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
+                Text(email.toString()),
+                SizedBox(height: 5),
+              ],
             ),
-            SizedBox(height: 40,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Age",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Text(age.toString(), style: TextStyle(fontSize: 14)),
+              ],
+            ),
+            SizedBox(height: 40),
             TextButton(
               style: TextButton.styleFrom(backgroundColor: Colors.blue),
               onPressed: () async {
                 SharedPreferences sp = await SharedPreferences.getInstance();
                 sp.clear();
-                Navigator.pushReplacementNamed(context, login.id
-                );
+                Navigator.pushReplacementNamed(context, login.id);
               },
               child: Text(
                 "LogOut",
