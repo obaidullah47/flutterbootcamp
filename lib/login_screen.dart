@@ -11,7 +11,8 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
-  String selectedvalue = "Male";
+  String selectedvalue = "usertype";
+
   final emailcontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
   final agecontroller = TextEditingController();
@@ -118,6 +119,7 @@ class _loginState extends State<login> {
                 sp.setString("age", agecontroller.text.toString());
                 sp.setString("gender", selectedvalue);
                 sp.setBool("isLogin", true);
+                sp.setString("male", "usertype");
                 Navigator.pushReplacementNamed(context, homescreen.id);
               },
               child: Container(
